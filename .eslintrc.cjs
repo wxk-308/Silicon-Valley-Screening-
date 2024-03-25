@@ -3,6 +3,11 @@ require('@rushstack/eslint-patch/modern-module-resolution')
 
 module.exports = {
   root: true,
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+    process: true
+  },
   extends: [
     'plugin:vue/vue3-essential',
     'eslint:recommended',
