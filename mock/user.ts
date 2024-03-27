@@ -67,5 +67,18 @@ export default [
       //如果有返回成功信息
       return { code: 200, data: { checkUser } }
     }
+  },
+  // 退出登录
+  {
+    url: '/api/user/loginout',
+    method: 'post',
+    response: ({ body }) => {
+      //获取请求头携带token
+      const { token } = body
+      //模拟后台删除token辨识
+      const checkUser = createUserList().filter((item) => item.token === token)
+      //如果有返回成功信息
+      return { code: 200, data: { message: '用户成功退出' } }
+    }
   }
 ]

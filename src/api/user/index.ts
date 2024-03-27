@@ -2,12 +2,14 @@ import request from '@/utils/request'
 import type {
   loginFormData,
   loginResponseData,
-  userInfoReponseData
+  userInfoReponseData,
+  loginOutResponseData
 } from './type'
 
 enum API {
   LOGIN_URL = '/user/login',
-  USERINFO_URL = '/user/info'
+  USERINFO_URL = '/user/info',
+  LOGINOUT_URL = '/user/loginout'
 }
 
 export const getLogin = (data: loginFormData) => {
@@ -15,4 +17,7 @@ export const getLogin = (data: loginFormData) => {
 }
 export const getUserInfo = () => {
   return request.get<any, userInfoReponseData>(API.USERINFO_URL)
+}
+export const loginOutUser = (data: string) => {
+  return request.post<any, loginOutResponseData>(API.LOGINOUT_URL, data)
 }

@@ -1,17 +1,19 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { getLogin, getUserInfo } from '@/api/user/index'
+import { getLogin, getUserInfo, loginOutUser } from '@/api/user/index'
 import type {
   loginFormData,
   loginResponseData,
-  userInfoReponseData
+  responseUser
 } from '@/api/user/type'
-import { SET_TOKEN, GET_TOKEN } from '@/utils/token'
+import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
+
 export const useUserStore = defineStore(
   'user',
   () => {
     let token: string | null = GET_TOKEN()
-    // let token: string | null = localStorage.getItem('token')
+    const username = ref<string>('')
+    const avatar = ref<string>('')
     const userLogin = async (data: loginFormData) => {
       const res: loginResponseData = await getLogin(data)
 
@@ -24,7 +26,26 @@ export const useUserStore = defineStore(
         return Promise.reject(new Error(res.data.message))
       }
     }
-    return { token, userLogin }
+    const userInfo = async () => {
+      const res = await getUserInfo()
+      if (res.code === 200) {
+        username.value = res.data.checkUser.username
+        avatar.value = res.data.checkUser.avatar
+      }
+    }
+    const userLogout = async () => {
+      //发送退出登录的请求
+      const res = await loginOutUser(token as string)
+
+      //清空本地的用户信息
+      REMOVE_TOKEN()
+      token = ''
+      username.value = ''
+      avatar.value = ''
+
+      //路由跳转到登录界面
+    }
+    return { token, username, avatar, userLogin, userInfo, userLogout }
   },
   {
     persist: true

@@ -29,9 +29,10 @@
 import { ref } from 'vue'
 import { UserFilled, Lock } from '@element-plus/icons-vue'
 import { useUserStore } from '@/stores/index'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { ElMessage } from 'element-plus'
 const userStore = useUserStore()
+const route = useRoute()
 const router = useRouter()
 
 let loginForm = ref({

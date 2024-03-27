@@ -12,19 +12,26 @@ export interface loginResponseData {
   data: dataType
 }
 
+export interface responseUser {
+  checkUser: {
+    userId: number
+    avatar: string
+    username: string
+    password: string
+    desc: string
+    roles: string[]
+    buttons: string[]
+    routes: string[]
+    token: string
+  }
+}
 export interface userInfoReponseData {
   code: number
+  data: responseUser
+}
+export interface loginOutResponseData {
+  code: number
   data: {
-    checkUser: {
-      userId: number
-      avatar: string
-      username: string
-      password: string
-      desc: string
-      roles: string[]
-      buttons: string[]
-      routes: string[]
-      token: string
-    }
+    message: string
   }
 }
