@@ -1,9 +1,9 @@
 <template>
-    <div class=""></div>
+  <div class=""></div>
 </template>
 
 <script setup lang="ts">
-import { } from 'vue'
+import {} from 'vue'
 </script>
 
 <style lang="scss" scoped></style>

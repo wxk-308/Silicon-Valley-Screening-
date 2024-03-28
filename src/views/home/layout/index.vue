@@ -8,8 +8,10 @@ import { useUserStore } from '@/stores/index'
 const userStore = useUserStore()
 
 onMounted(async () => {
-  await userStore.userInfo()
-  console.log(userStore.avatar)
+  if (!userStore.avatar) {
+    await userStore.userInfo()
+  }
+  // console.log(userStore.avatar)
 })
 </script>
 <style scoped lang="scss"></style>
